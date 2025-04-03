@@ -1,0 +1,14 @@
+WITH OrderedDates AS (
+    SELECT 
+        "Id",
+        "Dt" AS "Sd",
+        LAG("Dt") OVER (PARTITION BY "Id" ORDER BY "Dt") AS "Ed"
+    FROM public."Dates"
+)
+SELECT 
+    od."Id",
+    od."Sd" AS "Sd",
+    od."Ed" AS "Ed"
+FROM OrderedDates od
+WHERE od."Ed" IS NOT NULL
+ORDER BY od."Id", od."Sd";

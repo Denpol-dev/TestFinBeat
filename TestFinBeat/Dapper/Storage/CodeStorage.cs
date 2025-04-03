@@ -36,10 +36,10 @@ namespace TestFinBeat.Dapper.Storage
             }
         }
 
-        public async Task<List<CodeEntity>> SelectCodesAsync(CancellationToken cancellationToken = default)
+        public async Task<List<CodeEntity>> SelectCodesAsync(int? id, int? code, string? value, CancellationToken cancellationToken = default)
         {
             await OpenConnectionAsync();
-            var codes = await connection.QueryAsync<CodeEntity>(CodeQueries.SelectCodes());
+            var codes = await connection.QueryAsync<CodeEntity>(CodeQueries.SelectCodes(), new { Id = id, Code = code, Value = value });
             return codes.ToList();
         }
     }

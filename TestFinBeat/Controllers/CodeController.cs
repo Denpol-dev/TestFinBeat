@@ -38,20 +38,15 @@ namespace TestFinBeat.Controllers
 
         [HttpGet]
         [Route("api/code")]
-        public async Task<IActionResult> GetCodesAsync()
+        public async Task<IActionResult> GetCodesAsync(int? id, int? code, string? value)
         {
             if (!ModelState.IsValid)
             {
                 throw new ValidationException(string.Join(" ,", ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage)));
             }
 
-            var codes = await _codeService.GetCodesAsync(HttpContext.RequestAborted);
-            if (codes.Count > 0)
-            {
-                return Ok(codes);
-            }
-
-            return NotFound();
+            var codes = await _codeService.GetCodesAsync(id, code, value, HttpContext.RequestAborted);
+            return Ok(codes);
         }
     }
 }

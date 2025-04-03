@@ -1,0 +1,10 @@
+SELECT c."ClientName", COUNT(ct.*) AS "CountContact"
+FROM public."Clients" c
+LEFT JOIN public."ClientContacts" ct ON c."Id" = ct."ClientId"
+GROUP BY c."Id";
+
+SELECT c.*
+FROM public."Clients" c
+LEFT JOIN public."ClientContacts" ct ON c."Id" = ct."ClientId"
+GROUP BY c."Id"
+HAVING COUNT(ct.*) > 1;

@@ -17,7 +17,11 @@
         public static string SelectCodes()
         {
             return $@"SELECT ""Id"", ""Code"", ""Value""
-                      FROM public.""Code""";
+                      FROM public.""Code""
+                      WHERE 
+                        (@Id IS NULL OR ""Id"" = @Id) AND 
+                        (@Code IS NULL OR ""Code"" = @Code) AND 
+                        (@Value IS NULL OR ""Value"" = @Value)";
         }
     }
 }

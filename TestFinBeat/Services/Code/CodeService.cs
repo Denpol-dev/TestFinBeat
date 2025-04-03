@@ -33,9 +33,9 @@ namespace TestFinBeat.Services.Code
             return 0;
         }
 
-        public async Task<List<CodeEntity>> GetCodesAsync(CancellationToken cancellationToken = default)
+        public async Task<List<CodeEntity>> GetCodesAsync(int? id, int? code, string? value, CancellationToken cancellationToken = default)
         {
-            return await _codeStorage.SelectCodesAsync(cancellationToken);
+            return await _codeStorage.SelectCodesAsync(id, code, value, cancellationToken);
         }
     }
 }
